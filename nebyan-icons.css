@@ -1,0 +1,47 @@
+/* ============================================================
+   NEBYAN DOĞAL — Icon System
+   Version 1.0
+
+   Usage:
+   1. Load nebyan-icons.svg once at top of <body>
+   2. Use icons inline with <use> reference:
+
+   <span class="nb-icon nb-icon-20">
+     <svg><use href="#ni-truck"/></svg>
+   </span>
+
+   Size modifiers: nb-icon-14 / 16 / 20 / 24 / 28 / 32 / 48
+   ============================================================ */
+
+/* Base */
+.nb-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.nb-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Size scale */
+.nb-icon-14 { width: 14px; height: 14px; }
+.nb-icon-16 { width: 16px; height: 16px; }
+.nb-icon-20 { width: 20px; height: 20px; }
+.nb-icon-24 { width: 24px; height: 24px; }
+.nb-icon-28 { width: 28px; height: 28px; }
+.nb-icon-32 { width: 32px; height: 32px; }
+.nb-icon-48 { width: 48px; height: 48px; }
+
+/* Colour modifiers */
+.nb-icon-black  { color: var(--black); }
+.nb-icon-muted  { color: var(--muted); }
+.nb-icon-green  { color: var(--green-dark); }
+.nb-icon-accent { color: var(--green-accent); }
+.nb-icon-amber  { color: var(--amber); }
+.nb-icon-white  { color: var(--white); }
+.nb-icon-red    { color: var(--sale-red); }

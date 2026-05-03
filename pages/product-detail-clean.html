@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dana Kıyma Az Yağlı — Nebyan Doğal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#111111;--white:#ffffff;--bg:#F5F5F5;
+  --border:#E0E0E0;--muted:#888888;--text:#444444;
+  --green-dark:#1A4731;--green-mid:#2D6A4F;
+  --green-accent:#22C55E;--amber:#F59E0B;
+  --dark-banner:#1A1A1A;--font:'DM Sans',sans-serif;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-pill:100px;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--black);font-size:14px;line-height:1.5;}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;height:60px;position:sticky;top:0;z-index:100;gap:0;}
+.nav-logo{margin-right:32px;flex-shrink:0;display:flex;align-items:center;text-decoration:none;}
+.nav-cats{display:flex;flex:1;}
+.nav-cat{font-size:13px;font-weight:500;color:var(--text);padding:0 14px;height:60px;display:flex;align-items:center;cursor:pointer;border-bottom:2px solid transparent;text-decoration:none;}
+.nav-cat:hover{color:var(--black);}
+.nav-cat.active{color:var(--black);border-bottom-color:var(--black);}
+.nav-right{display:flex;align-items:center;gap:16px;flex-shrink:0;}
+.search-bar{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-pill);padding:7px 16px;font-size:13px;color:var(--muted);width:200px;cursor:text;}
+.nav-icon{font-size:18px;cursor:pointer;color:var(--text);}
+.cart-wrap{position:relative;}
+.cart-badge{position:absolute;top:-6px;right:-8px;background:var(--black);color:var(--white);font-size:9px;font-weight:800;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.region-btn{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:var(--r-pill);padding:5px 12px;cursor:pointer;}
+
+/* BREADCRUMB */
+.breadcrumb{padding:14px 40px;font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center;}
+.breadcrumb a{color:var(--muted);text-decoration:none;}
+.breadcrumb a:hover{color:var(--black);}
+.breadcrumb-sep{color:var(--border);}
+.breadcrumb-current{color:var(--black);font-weight:500;}
+
+/* PAGE */
+.page{padding:0 40px 80px;max-width:1200px;margin:0 auto;}
+
+/* PRODUCT MAIN */
+.product-main{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:64px;}
+
+/* GALLERY */
+.gallery{display:flex;gap:12px;}
+.thumbs{display:flex;flex-direction:column;gap:8px;}
+.thumb{width:72px;height:72px;border-radius:var(--r-md);border:2px solid transparent;cursor:pointer;background:var(--white);border-color:var(--border);display:flex;align-items:center;justify-content:center;font-size:28px;transition:border-color .15s;}
+.thumb.active{border-color:var(--black);}
+.thumb:hover{border-color:var(--muted);}
+.main-img{flex:1;background:var(--white);border-radius:var(--r-xl);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:96px;min-height:420px;position:relative;}
+.zoom-btn{position:absolute;top:16px;right:16px;background:var(--white);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;}
+.nav-arrow{position:absolute;background:var(--white);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;top:50%;transform:translateY(-50%);}
+.nav-arrow.left{left:12px;}
+.nav-arrow.right{right:12px;}
+
+/* PRODUCT INFO */
+.vendor-row{font-size:13px;color:var(--muted);margin-bottom:8px;}
+.vendor-row a{color:var(--green-dark);font-weight:600;text-decoration:none;}
+.product-title{font-size:30px;font-weight:800;letter-spacing:-0.03em;color:var(--black);line-height:1.15;margin-bottom:16px;}
+.price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.price-main{font-size:28px;font-weight:800;color:var(--black);}
+.price-unit{font-size:13px;color:var(--muted);}
+.price-old{font-size:16px;color:var(--muted);text-decoration:line-through;}
+.price-badge{background:var(--amber);color:var(--black);font-size:11px;font-weight:800;padding:3px 10px;border-radius:var(--r-pill);}
+
+/* BADGES */
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.badge-pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:5px 14px;border-radius:var(--r-pill);}
+.badge-dark{background:var(--black);color:var(--white);}
+.badge-green{background:var(--green-accent);color:var(--white);}
+.badge-amber{background:var(--amber);color:var(--black);}
+.badge-outline{border:1.5px solid var(--border);color:var(--black);}
+
+/* STOCK */
+.stock-row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:24px;}
+.stock-dot{width:10px;height:10px;border-radius:50%;background:var(--green-accent);}
+
+/* OPTIONS */
+.option-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+.option-row{display:flex;gap:8px;margin-bottom:24px;}
+.opt-btn{font-family:var(--font);font-size:13px;font-weight:700;padding:8px 20px;border-radius:var(--r-pill);border:2px solid var(--border);background:var(--white);cursor:pointer;color:var(--black);transition:all .15s;}
+.opt-btn.active{background:var(--black);color:var(--white);border-color:var(--black);}
+.opt-btn:hover:not(.active){border-color:var(--black);}
+
+/* QTY + CART */
+.qty-cart{display:flex;gap:10px;margin-bottom:12px;}
+.qty-ctrl{display:flex;align-items:center;border:2px solid var(--border);border-radius:var(--r-pill);overflow:hidden;background:var(--white);}
+.qty-btn{width:40px;height:44px;background:none;border:none;font-size:18px;cursor:pointer;font-family:var(--font);}
+.qty-btn:hover{background:var(--bg);}
+.qty-val{width:40px;text-align:center;font-size:15px;font-weight:700;}
+.btn-cart{flex:1;background:var(--bg);border:2px solid var(--border);color:var(--black);font-family:var(--font);font-size:14px;font-weight:700;height:44px;border-radius:var(--r-pill);cursor:pointer;transition:all .15s;}
+.btn-cart:hover{border-color:var(--black);}
+.btn-buy{width:100%;background:var(--black);color:var(--white);font-family:var(--font);font-size:14px;font-weight:700;padding:14px;border-radius:var(--r-pill);border:none;cursor:pointer;margin-bottom:20px;transition:opacity .15s;}
+.btn-buy:hover{opacity:.85;}
+
+/* PROMO */
+.promo-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-md);padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.promo-text{font-size:12px;font-weight:600;color:var(--green-dark);flex:1;}
+.promo-close{color:var(--muted);font-size:14px;cursor:pointer;}
+
+/* TRUST */
+.trust-strip{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;color:var(--text);}
+
+/* PICKUP */
+.pickup-box{border:1px solid var(--border);border-radius:var(--r-md);padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;cursor:pointer;transition:border-color .15s;}
+.pickup-box:hover{border-color:var(--black);}
+.pickup-title{font-size:13px;font-weight:700;color:var(--black);}
+.pickup-sub{font-size:12px;color:var(--muted);}
+
+/* SHARE */
+.share-row{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;}
+.share-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;}
+
+/* RELATED */
+.section-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.section-title{font-size:22px;font-weight:800;letter-spacing:-0.025em;color:var(--black);margin-bottom:24px;}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:64px;}
+.prod-card{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--border);padding:16px;cursor:pointer;transition:border-color .15s;}
+.prod-card:hover{border-color:var(--black);}
+.prod-img{width:100%;aspect-ratio:1;background:var(--bg);border-radius:var(--r-md);margin-bottom:12px;position:relative;display:flex;align-items:center;justify-content:center;font-size:40px;}
+.prod-badge{position:absolute;top:8px;left:8px;font-size:9px;font-weight:800;padding:3px 8px;border-radius:var(--r-pill);}
+.prod-name{font-size:12px;color:var(--text);margin-bottom:4px;line-height:1.4;}
+.prod-price{font-size:14px;font-weight:800;color:var(--black);margin-bottom:10px;}
+.prod-price span{font-size:11px;font-weight:400;color:var(--muted);}
+.prod-add{width:100%;background:var(--black);color:var(--white);font-family:var(--font);font-size:12px;font-weight:700;padding:9px 0;border-radius:var(--r-pill);border:none;cursor:pointer;transition:opacity .15s;}
+.prod-add:hover{opacity:.8;}
+
+/* INFO STRIP */
+.info-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:64px;}
+.info-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 16px;display:flex;align-items:center;gap:10px;}
+.info-card-icon{font-size:22px;flex-shrink:0;}
+.info-card-title{font-size:12px;font-weight:700;color:var(--black);}
+.info-card-sub{font-size:11px;color:var(--muted);}
+
+/* NEWSLETTER */
+.newsletter{background:var(--dark-banner);border-radius:var(--r-xl);padding:40px;display:flex;align-items:center;gap:48px;margin-bottom:64px;}
+.newsletter-img{width:240px;height:160px;background:#2a2a2a;border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:48px;flex-shrink:0;}
+.newsletter-title{font-size:22px;font-weight:800;color:var(--white);margin-bottom:6px;letter-spacing:-0.02em;}
+.newsletter-sub{font-size:13px;color:#aaa;margin-bottom:20px;}
+.newsletter-form{display:flex;gap:10px;}
+.newsletter-input{flex:1;background:#2a2a2a;border:1px solid #444;border-radius:var(--r-pill);padding:11px 20px;font-size:14px;color:var(--white);font-family:var(--font);outline:none;}
+.newsletter-input::placeholder{color:#666;}
+.newsletter-btn{background:var(--white);color:var(--black);font-family:var(--font);font-size:14px;font-weight:700;padding:11px 24px;border-radius:var(--r-pill);border:none;cursor:pointer;}
+.newsletter-btn:hover{background:#eee;}
+.newsletter-legal{font-size:11px;color:#666;margin-top:10px;}
+.newsletter-legal a{color:#888;text-decoration:none;}
+
+/* FOOTER */
+.footer{padding:56px 40px 28px;background:var(--green-dark);}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:240px 1fr 1fr 1fr;gap:48px;margin-bottom:40px;}
+.footer-logo{display:block;text-decoration:none;margin-bottom:12px;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.55);margin-top:10px;line-height:1.7;}
+.footer-col-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;color:rgba(255,255,255,0.5);}
+.footer-link{display:block;font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:10px;text-decoration:none;}
+.footer-link:hover{color:var(--white);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.15);padding-top:24px;font-size:12px;color:rgba(255,255,255,0.5);flex-wrap:wrap;gap:12px;}
+.footer-socials{display:flex;gap:10px;}
+.social-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.25);background:transparent;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;color:var(--white);}
+.social-btn:hover{border-color:var(--white);}
+.footer-legal{display:flex;gap:20px;}
+.gallery{align-self:start;}
+.main-img{aspect-ratio:1;min-height:0;overflow:hidden;}
+.main-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.thumb{overflow:hidden;}
+.thumb img{width:100%;height:100%;object-fit:cover;}
+.prod-img{overflow:hidden;}
+.prod-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.newsletter-img{overflow:hidden;}
+.newsletter-img img{width:100%;height:100%;object-fit:cover;display:block;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="homepage.html"><img src="../Assets/logo-green.svg" alt="Nebyan Doğal" height="44"></a>
+  <div class="nav-cats">
+    <a class="nav-cat" href="#">Kategoriye Göre</a>
+    <a class="nav-cat active" href="#">Taze Et Ürünleri</a>
+    <a class="nav-cat" href="#">Süt Ürünleri</a>
+    <a class="nav-cat" href="#">Nebyan Kiler</a>
+    <a class="nav-cat" href="#">Yemek Tarifleri</a>
+    <a class="nav-cat" href="#">Blog</a>
+    <a class="nav-cat" href="#">İletişim</a>
+  </div>
+  <div class="nav-right">
+    <button class="region-btn">📍 Bölge Seç ▾</button>
+    <div class="search-bar">🔍 Ara...</div>
+    <span class="nav-icon">👤</span>
+    <span class="nav-icon">🔖</span>
+    <div class="cart-wrap">
+      <span class="nav-icon">🛒</span>
+      <div class="cart-badge">2</div>
+    </div>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Anasayfa</a><span class="breadcrumb-sep">›</span>
+  <a href="#">Taze Et Ürünleri</a><span class="breadcrumb-sep">›</span>
+  <a href="#">Dana Ürünleri</a><span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-current">Dana Kıyma Az Yağlı</span>
+</div>
+
+<div class="page">
+
+  <!-- PRODUCT MAIN -->
+  <div class="product-main">
+
+    <!-- GALLERY -->
+    <div class="gallery">
+      <div class="thumbs">
+        <div class="thumb active"><img src="../Assets/YtC5ZIHA.jpeg" alt="Dana Kıyma Az Yağlı"></div>
+        <div class="thumb"><img src="../Assets/Nebyan Külbastı Ahşap 2.jpg" alt="Dana Kıyma Az Yağlı"></div>
+      </div>
+      <div class="main-img">
+        <img src="../Assets/YtC5ZIHA.jpeg" alt="Dana Kıyma Az Yağlı">
+        <div class="zoom-btn">🔍</div>
+        <div class="nav-arrow left">‹</div>
+        <div class="nav-arrow right">›</div>
+      </div>
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div>
+      <div class="vendor-row">Katalog: <a href="#">Dana Ürünleri</a></div>
+      <h1 class="product-title">Dana Kıyma Az Yağlı</h1>
+
+      <div class="price-row">
+        <span class="price-main">₺655,00</span>
+        <span class="price-unit">/ 500g</span>
+        <span class="price-old">₺720,00</span>
+        <span class="price-badge">%9 İndirim</span>
+      </div>
+
+      <div class="badge-row">
+        <span class="badge-pill badge-green">Taze</span>
+        <span class="badge-pill badge-dark">Çok Satan</span>
+        <span class="badge-pill badge-outline">Sezon: İlkbahar</span>
+      </div>
+
+      <div class="stock-row">
+        <div class="stock-dot"></div>
+        Stokta Var — 23 adet
+      </div>
+
+      <div class="option-label">Paket Seçeneği</div>
+      <div class="option-row">
+        <button class="opt-btn active" onclick="selectOpt(this)">500g</button>
+        <button class="opt-btn" onclick="selectOpt(this)">1 kg</button>
+        <button class="opt-btn" onclick="selectOpt(this)">2 kg</button>
+      </div>
+
+      <div class="qty-cart">
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <span class="qty-val" id="qty">1</span>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <button class="btn-cart">Sepete Ekle</button>
+      </div>
+      <button class="btn-buy">Hemen Satın Al</button>
+
+      <div class="promo-box">
+        <span style="color:var(--green-dark);font-size:16px;">⚡</span>
+        <span class="promo-text">1.000 TL ve üzeri siparişlerde <strong>20 TL indirim!</strong></span>
+        <span class="promo-close" onclick="this.parentElement.style.display='none'">✕</span>
+      </div>
+
+      <div class="trust-strip">
+        <div class="trust-item">🚚 Ücretsiz teslimat — 500 TL ve üzeri siparişlerde</div>
+        <div class="trust-item">↩️ 30 gün içinde ücretsiz iade</div>
+        <div class="trust-item">❄️ Soğuk zincirle teslim — kalite garantisi</div>
+      </div>
+
+      <div class="pickup-box">
+        <span style="font-size:20px;">🏪</span>
+        <div>
+          <div class="pickup-title">Mağazadan teslim alınabilir</div>
+          <div class="pickup-sub">Çekmeköy Mağazası — genellikle 24 saat içinde hazır</div>
+        </div>
+        <span style="margin-left:auto;color:var(--muted);">›</span>
+      </div>
+
+      <div class="share-row">
+        <span>Paylaş:</span>
+        <button class="share-btn">f</button>
+        <button class="share-btn">𝕏</button>
+        <button class="share-btn">📌</button>
+        <button class="share-btn">🔗</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED PRODUCTS -->
+  <div class="section-label">Son Gezilen Ürünler</div>
+  <div class="section-title">Bunları da Beğenebilirsiniz</div>
+  <div class="products-grid">
+    <div class="prod-card">
+      <div class="prod-img">
+        <img src="../Assets/sQD0XWWQ.jpeg" alt="Az Yağlı Kuzu Kıyma">
+        <span class="prod-badge" style="background:var(--amber);color:var(--black);">Çok Satan</span>
+      </div>
+      <div class="prod-name">Az Yağlı Kuzu Kıyma</div>
+      <div class="prod-price">₺1.062,50 <span>/ 500g</span></div>
+      <button class="prod-add">Sepete Ekle</button>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img">
+        <img src="../Assets/AapDi8Dg.jpeg" alt="Kuzu İlikli Kemik">
+        <span class="prod-badge" style="background:var(--green-accent);color:var(--white);">Taze</span>
+      </div>
+      <div class="prod-name">Kuzu İlikli Kemik</div>
+      <div class="prod-price">₺202,50 <span>/ adet</span></div>
+      <button class="prod-add">Sepete Ekle</button>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img">
+        🫙
+        <span class="prod-badge" style="background:var(--black);color:var(--white);">Yeni</span>
+      </div>
+      <div class="prod-name">Lütfiye Organik Böğürtlen Reçeli 280g</div>
+      <div class="prod-price">₺360,00 <span>/ adet</span></div>
+      <button class="prod-add">Sepete Ekle</button>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img">🌿</div>
+      <div class="prod-name">Zeytinalı Kekik</div>
+      <div class="prod-price">₺30,00 <span>/ paket</span></div>
+      <button class="prod-add">Sepete Ekle</button>
+    </div>
+  </div>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip">
+    <div class="info-card"><span class="info-card-icon">💬</span><div><div class="info-card-title">Müşteri Hizmetleri</div><div class="info-card-sub">09:00 – 18:00 arası</div></div></div>
+    <div class="info-card"><span class="info-card-icon">📞</span><div><div class="info-card-title">Bizi Arayın</div><div class="info-card-sub">(0850) 305 33 55</div></div></div>
+    <div class="info-card"><span class="info-card-icon">✉️</span><div><div class="info-card-title">E-posta Gönderin</div><div class="info-card-sub">info@nebyandogal.com</div></div></div>
+    <div class="info-card"><span class="info-card-icon">📍</span><div><div class="info-card-title">Adres</div><div class="info-card-sub">Merkez Mah. İtri Sok No: 2/A Çekmeköy</div></div></div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <div class="newsletter-img"><img src="../Assets/GqdNORfw.jpeg" alt="Nebyan Doğal"></div>
+    <div>
+      <h2 class="newsletter-title">Bültenimize Katılın</h2>
+      <p class="newsletter-sub">Kayıt olun ve ilk siparişinizde %10 indirim kazanın.</p>
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="E-posta adresiniz...">
+        <button class="newsletter-btn">Kayıt Ol</button>
+      </div>
+      <div class="newsletter-legal">Kayıt olarak <a href="#">Kullanım Koşulları</a> ve <a href="#">Gizlilik Politikası</a>'nı kabul etmiş olursunuz.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <a class="footer-logo" href="homepage.html"><img src="../Assets/logo-cream.svg" alt="Nebyan Doğal" height="72"></a>
+          <div class="footer-tagline">Yayla ve meralarımızda özgürce beslenen hayvanlarımızın en doğal et ürünlerini, sürdürülebilir tarım ilkeleriyle doğrudan kapınıza getiriyoruz.</div>
+        </div>
+        <div>
+          <div class="footer-col-title">Biz Kimiz?</div>
+          <a class="footer-link" href="#">Hikayemiz</a>
+          <a class="footer-link" href="#">Geleneğimiz</a>
+          <a class="footer-link" href="#">Kaynağı Belli Doğal Et</a>
+          <a class="footer-link" href="#">Yerli Irk Karakaya Koyunu</a>
+          <a class="footer-link" href="#">Büyükbaş Hayvancılık</a>
+          <a class="footer-link" href="#">Yerel Üreticilerimiz</a>
+        </div>
+        <div>
+          <div class="footer-col-title">Nasıl Çalışıyoruz?</div>
+          <a class="footer-link" href="#">Kargo</a>
+          <a class="footer-link" href="#">Teslimatlar</a>
+          <a class="footer-link" href="#">Neredeyiz?</a>
+          <a class="footer-link" href="#">Tesisimiz</a>
+          <a class="footer-link" href="#">Kalite ve Gıda Güvenliği</a>
+          <a class="footer-link" href="#">Analiz Sonuçları</a>
+        </div>
+        <div>
+          <div class="footer-col-title">İletişim</div>
+          <a class="footer-link" href="#">Gizlilik Politikası</a>
+          <a class="footer-link" href="#">Mesafeli Satış Sözleşmesi</a>
+          <a class="footer-link" href="#">Teslimat ve İade Şartları</a>
+          <a class="footer-link" href="#">Bizimle Çalışmak İster Misiniz?</a>
+          <a class="footer-link" href="#">KVKK Açık Rıza Metni</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Nebyan Doğal Gıda San. Tic. A.Ş. Tüm hakları saklıdır.</span>
+        <div class="footer-socials">
+          <button class="social-btn">📸</button>
+          <button class="social-btn">f</button>
+          <button class="social-btn">▶</button>
+          <button class="social-btn">𝕏</button>
+        </div>
+        <div class="footer-legal">
+          <a class="footer-link" href="#" style="margin:0">Kişisel Verilerin Korunması</a>
+          <a class="footer-link" href="#" style="margin:0">Gizlilik Politikası</a>
+          <a class="footer-link" href="#" style="margin:0">KVKK</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+function changeQty(delta){
+  const el=document.getElementById('qty');
+  let v=parseInt(el.textContent)+delta;
+  if(v<1)v=1;
+  el.textContent=v;
+}
+function selectOpt(btn){
+  btn.closest('.option-row').querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

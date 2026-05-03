@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<defs>
+
+  <!-- ── NAVIGATION & UI ───────────────────────────────── -->
+
+  <symbol id="ni-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10.5" cy="10.5" r="6.75"/>
+    <path d="M15.75 15.75 21 21"/>
+  </symbol>
+
+  <symbol id="ni-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 6h18M3 12h18M3 18h18"/>
+  </symbol>
+
+  <symbol id="ni-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 6 6 18M6 6l12 12"/>
+  </symbol>
+
+  <symbol id="ni-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12h14M13 6l6 6-6 6"/>
+  </symbol>
+
+  <symbol id="ni-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 12H5M11 18l-6-6 6-6"/>
+  </symbol>
+
+  <symbol id="ni-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9l6 6 6-6"/>
+  </symbol>
+
+  <symbol id="ni-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 6l6 6-6 6"/>
+  </symbol>
+
+  <symbol id="ni-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2.25 4.5h19.5M5.25 9h13.5M8.25 13.5h7.5M10.5 18h3"/>
+  </symbol>
+
+  <symbol id="ni-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="7.5" height="7.5" rx="1"/>
+    <rect x="13.5" y="3" width="7.5" height="7.5" rx="1"/>
+    <rect x="3" y="13.5" width="7.5" height="7.5" rx="1"/>
+    <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1"/>
+  </symbol>
+
+  <symbol id="ni-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3.75 6h16.5M3.75 12h16.5M3.75 18h16.5"/>
+  </symbol>
+
+  <symbol id="ni-zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10.5" cy="10.5" r="6.75"/>
+    <path d="M21 21l-4.5-4.5M10.5 7.5v6M7.5 10.5h6"/>
+  </symbol>
+
+  <symbol id="ni-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 5.25v13.5M5.25 12h13.5"/>
+  </symbol>
+
+  <symbol id="ni-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5.25 12h13.5"/>
+  </symbol>
+
+  <symbol id="ni-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4.5 12.75l4.5 4.5 10.5-10.5"/>
+  </symbol>
+
+  <symbol id="ni-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 5.25C7.5 5.25 3.75 9 2.25 12c1.5 3 5.25 6.75 9.75 6.75S20.25 15 21.75 12C20.25 9 16.5 5.25 12 5.25Z"/>
+    <circle cx="12" cy="12" r="2.25"/>
+  </symbol>
+
+  <symbol id="ni-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2.25" y="4.5" width="19.5" height="15" rx="2"/>
+    <path d="m2.25 14.25 4.5-4.5 3 3 2.25-2.25 3.75 3.75"/>
+    <circle cx="16.5" cy="9" r="1.5"/>
+  </symbol>
+
+  <symbol id="ni-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13.5 6H6a1.5 1.5 0 0 0-1.5 1.5v10.5A1.5 1.5 0 0 0 6 19.5h10.5a1.5 1.5 0 0 0 1.5-1.5V11.25M16.5 4.5h3v3M13.5 10.5l6-6"/>
+  </symbol>
+
+  <!-- ── USER & ACCOUNT ─────────────────────────────────── -->
+
+  <symbol id="ni-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="8" r="4"/>
+    <path d="M5 20a7 7 0 0 1 14 0"/>
+  </symbol>
+
+  <symbol id="ni-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20.25C4.5 15.75 2.25 11.25 2.25 8.25a5.25 5.25 0 0 1 9.75-2.7A5.25 5.25 0 0 1 21.75 8.25c0 3-2.25 7.5-9.75 12Z"/>
+  </symbol>
+
+  <symbol id="ni-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 3h14a1 1 0 0 1 1 1v17l-8-4-8 4V4a1 1 0 0 1 1-1Z"/>
+  </symbol>
+
+  <symbol id="ni-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2.25l2.73 5.53 6.1.89-4.41 4.3 1.04 6.06L12 16.02 6.54 19.03l1.04-6.06-4.41-4.3 6.1-.89L12 2.25Z"/>
+  </symbol>
+
+  <!-- ── CART & COMMERCE ────────────────────────────────── -->
+
+  <symbol id="ni-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2.25 3h1.5l2.45 9.8a1 1 0 0 0 .97.7h9.16a1 1 0 0 0 .96-.72l1.96-6.78H5.25"/>
+    <circle cx="9" cy="19.5" r="1.5"/>
+    <circle cx="18" cy="19.5" r="1.5"/>
+  </symbol>
+
+  <symbol id="ni-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 3h7l11 11-7 7L3 10V3Z"/>
+    <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="ni-lightning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13 2.25 4.5 13.5h7.5L9 21.75l10.5-12h-7.5L13 2.25Z"/>
+  </symbol>
+
+  <!-- ── DELIVERY & LOGISTICS ───────────────────────────── -->
+
+  <symbol id="ni-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="1.5" y="8.25" width="13.5" height="10.5" rx="1"/>
+    <path d="M15 11.25h4.5l3 3v4.5H15V11.25Z"/>
+    <circle cx="6" cy="19.5" r="1.5"/>
+    <circle cx="18" cy="19.5" r="1.5"/>
+  </symbol>
+
+  <symbol id="ni-return" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4.5 12A7.5 7.5 0 0 1 12 4.5c3 0 5.6 1.74 6.88 4.28M19.5 12a7.5 7.5 0 0 1-7.5 7.5c-3 0-5.6-1.74-6.88-4.28"/>
+    <path d="M4.5 4.5v4h4M19.5 19.5v-4h-4"/>
+  </symbol>
+
+  <symbol id="ni-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2.25A7.5 7.5 0 0 1 19.5 9.75c0 5.25-7.5 12-7.5 12s-7.5-6.75-7.5-12A7.5 7.5 0 0 1 12 2.25Z"/>
+    <circle cx="12" cy="9.75" r="2.25"/>
+  </symbol>
+
+  <symbol id="ni-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9Z"/>
+    <path d="M9 22V12h6v10"/>
+  </symbol>
+
+  <!-- ── FOOD & NATURE ──────────────────────────────────── -->
+
+  <symbol id="ni-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3C7 3 3 8 3 13c0 3.5 2 6.5 5 8 0-4 2-8 4-10-1 3-1 7 0 10a9 9 0 0 0 9-9c0-5-4-9-9-9Z"/>
+  </symbol>
+
+  <symbol id="ni-snowflake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3v18M3 12h18M6.34 6.34l11.32 11.32M17.66 6.34 6.34 17.66"/>
+  </symbol>
+
+  <symbol id="ni-pan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10" cy="13" r="6"/>
+    <path d="M16 13h5M19 10v6"/>
+  </symbol>
+
+  <symbol id="ni-oven" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="3" width="20" height="18" rx="2"/>
+    <rect x="6" y="8" width="12" height="9" rx="1"/>
+    <circle cx="7.5" cy="5.5" r="1"/>
+    <circle cx="12" cy="5.5" r="1"/>
+    <circle cx="16.5" cy="5.5" r="1"/>
+  </symbol>
+
+  <symbol id="ni-pot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 8h12l-1.5 9a1 1 0 0 1-1 .75H8.5a1 1 0 0 1-1-.75L6 8Z"/>
+    <path d="M4 8h16M9 8V6a3 3 0 0 1 6 0v2"/>
+  </symbol>
+
+  <symbol id="ni-grill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 8h18M5 8l2 10h10l2-10"/>
+    <path d="M12 18v3M9 21h6"/>
+    <path d="M7 5c0-1.5 2-1.5 2-3M12 5c0-1.5 2-1.5 2-3M17 5c0-1.5 2-1.5 2-3"/>
+  </symbol>
+
+  <!-- ── TRUST & SECURITY ───────────────────────────────── -->
+
+  <symbol id="ni-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2.25 3.75 6v6c0 5.25 3.75 10.15 8.25 11.25C16.5 22.15 20.25 17.25 20.25 12V6L12 2.25Z"/>
+  </symbol>
+
+  <symbol id="ni-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M12 8.25v.75M12 11.25v5.25"/>
+  </symbol>
+
+  <!-- ── COMMUNICATION ──────────────────────────────────── -->
+
+  <symbol id="ni-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2.25 12.75A9.75 9.75 0 0 1 12 3a9.75 9.75 0 0 1 9.75 9.75c0 5.39-4.36 9.75-9.75 9.75a9.72 9.72 0 0 1-4.88-1.3L2.25 22.5l1.05-4.88A9.72 9.72 0 0 1 2.25 12.75Z"/>
+  </symbol>
+
+  <symbol id="ni-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/>
+  </symbol>
+
+  <symbol id="ni-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2.25" y="4.5" width="19.5" height="15" rx="2.25"/>
+    <path d="m2.25 6.75 9.75 6.75 9.75-6.75"/>
+  </symbol>
+
+  <symbol id="ni-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="18" cy="5" r="3"/>
+    <circle cx="6" cy="12" r="3"/>
+    <circle cx="18" cy="19" r="3"/>
+    <path d="M8.59 13.51 15.42 17.49M15.41 6.51 8.59 10.49"/>
+  </symbol>
+
+  <!-- ── SOCIAL ──────────────────────────────────────────── -->
+
+  <symbol id="ni-social-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="5.25"/>
+    <circle cx="12" cy="12" r="4.5"/>
+    <circle cx="17.25" cy="6.75" r=".75" fill="currentColor" stroke="none"/>
+  </symbol>
+
+  <symbol id="ni-social-fb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 2.25h-3a5 5 0 0 0-5 5V10.5H6v4.5h3v6.75h4.5V15h3l.75-4.5h-3.75V7.25A.75.75 0 0 1 14.25 6.5H17V2.25Z"/>
+  </symbol>
+
+  <symbol id="ni-social-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="5" width="20" height="14" rx="3"/>
+    <path d="M10 9l5 3-5 3V9Z" fill="currentColor" stroke="none"/>
+  </symbol>
+
+  <symbol id="ni-social-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4l6.5 8.5L4 20h2.5l4.75-5.25L15.5 20H20l-6.75-9L19.5 4H17l-4.5 5-4.5-5H4Z"/>
+  </symbol>
+
+</defs>
+</svg>

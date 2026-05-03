@@ -1,0 +1,106 @@
+/* ============================================================
+   NEBYAN DOĞAL — Design Token System
+   Version 1.0
+   Last updated: May 2026
+
+   Usage: Import this file first in every page.
+   <link rel="stylesheet" href="../nebyan-tokens.css">
+   ============================================================ */
+
+:root {
+
+  /* ── COLOUR PALETTE ─────────────────────────────────────── */
+
+  /* Core */
+  --black:          #111111;
+  --white:          #ffffff;
+
+  /* Backgrounds */
+  --bg:             #F5F5F5;
+  --bg-card:        #ffffff;
+  --bg-dark:        #1A1A1A;
+  --bg-dark-input:  #2a2a2a;
+  --bg-cream:       #F0EDE8;
+
+  /* Borders */
+  --border:         #E0E0E0;
+  --border-dark:    #444444;
+
+  /* Text */
+  --text:           #444444;
+  --muted:          #888888;
+  --muted-dark:     #aaaaaa;
+
+  /* ── NEBYAN BRAND PALETTE (Official) ───────────────────── */
+
+  /* Foundation */
+  --night-forest:   #104828;   /* primary brand green */
+  --soil:           #BDB976;   /* olive / earthy */
+  --natural:        #F7EFE2;   /* cream / off-white */
+  --minty:          #8CAF88;   /* sage green */
+
+  /* Category colors */
+  --meat:           #8C2F23;   /* Et & Kasap */
+  --poultry:        #E6C7A1;   /* Kümes Hayvanları */
+  --dairy:          #F2E6D8;   /* Süt Ürünleri */
+  --fresh:          #6FAF6A;   /* Taze Ürünler */
+  --deli:           #7AB450;   /* Deli & Hazır Yemek */
+  --dried:          #D8BA3D;   /* Kuru Gıdalar */
+  --seafood:        #2F6F73;   /* Deniz Ürünleri */
+  --promo:          #F05A28;   /* Kampanya & Fırsat */
+
+  /* ── ALIASES (used in components) ───────────────────────── */
+
+  --green-dark:     var(--night-forest);
+  --green-mid:      #2D6A4F;
+  --green-light:    var(--minty);
+  --green-accent:   var(--fresh);
+  --cream:          var(--natural);
+
+  /* Green tints (for badges / promo boxes) */
+  --green-tint-bg:  #f0fdf4;
+  --green-tint-bd:  #bbf7d0;
+  --green-attr-bg:  #f0faf4;
+
+  /* Accent */
+  --amber:          var(--dried);
+  --rust:           var(--meat);
+
+  /* Semantic */
+  --sale-red:       var(--promo);
+
+  /* ── TYPOGRAPHY ─────────────────────────────────────────── */
+
+  --font:           'DM Sans', sans-serif;
+  --serif:          'DM Serif Display', serif;
+
+  /* ── BORDER RADIUS ──────────────────────────────────────── */
+
+  --r-sm:           8px;
+  --r-md:           12px;
+  --r-lg:           16px;
+  --r-xl:           20px;
+  --r-pill:         100px;
+
+  /* ── SPACING ────────────────────────────────────────────── */
+
+  --space-xs:       8px;
+  --space-sm:       12px;
+  --space-md:       16px;
+  --space-lg:       24px;
+  --space-xl:       32px;
+  --space-2xl:      48px;
+  --space-3xl:      64px;
+  --space-4xl:      80px;
+
+  /* ── LAYOUT ─────────────────────────────────────────────── */
+
+  --max-width:      1200px;
+  --page-x:         40px;
+
+  /* ── NAVIGATION ─────────────────────────────────────────── */
+
+  --nav-height:     64px;
+  --nav-z:          200;
+
+}
