@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebyan — Dropdown Tasarım Önerisi</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../nebyan-tokens.css">
+<link rel="stylesheet" href="../nebyan-icons.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--black);font-size:14px;}
+
+/* ─── LABEL STRIP ─── */
+.variant-label{background:var(--night-forest);color:var(--white);text-align:center;padding:10px;font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;}
+.variant-sub{background:#1a3320;color:rgba(255,255,255,0.5);text-align:center;padding:7px;font-size:11px;}
+
+/* ─── SHARED NAV ─── */
+.nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;height:64px;position:relative;z-index:300;}
+.nav-logo{margin-right:36px;flex-shrink:0;}
+.nav-logo img{height:40px;display:block;}
+.nav-items{display:flex;flex:1;height:100%;}
+.nav-item{position:relative;height:100%;display:flex;align-items:center;}
+.nav-link{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--text);padding:0 14px;height:100%;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;text-decoration:none;user-select:none;}
+.nav-link:hover,.nav-link.open{color:var(--black);border-bottom-color:var(--night-forest);}
+.nav-link .chevron{transition:transform .2s;}
+.nav-link.open .chevron{transform:rotate(180deg);}
+.nav-right{display:flex;align-items:center;gap:12px;margin-left:auto;}
+.nav-btn{width:36px;height:36px;border-radius:50%;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);}
+.search-pill{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-pill);padding:7px 16px;font-size:13px;color:var(--muted);width:200px;}
+.cart-wrap{position:relative;}
+.cart-badge{position:absolute;top:-3px;right:-3px;background:var(--night-forest);color:#fff;font-size:9px;font-weight:800;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+/* ══════════════════════════════════
+   VARIANT A — MEGA MENU
+   Full-width panel with category grid + featured banner
+   ══════════════════════════════════ */
+
+.mega{position:absolute;top:100%;left:0;right:0;width:100vw;margin-left:calc(-40px - 40px - 40px);background:var(--white);border-top:2px solid var(--night-forest);box-shadow:0 20px 48px rgba(0,0,0,.12);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s, transform .2s, visibility .2s;z-index:200;}
+.nav-item:hover .mega,.nav-item.open .mega{opacity:1;visibility:visible;transform:translateY(0);}
+.mega-inner{max-width:1200px;margin:0 auto;padding:28px 40px;display:grid;grid-template-columns:1fr 300px;gap:40px;}
+
+/* left: category groups */
+.mega-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+.mega-group{padding:0 24px 0 0;}
+.mega-group+.mega-group{border-left:1px solid var(--border);padding-left:24px;}
+.mega-group-title{font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.mega-cat-link{display:flex;align-items:center;gap:10px;padding:7px 0;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;border-radius:var(--r-sm);transition:color .15s;}
+.mega-cat-link:hover{color:var(--night-forest);}
+.mega-cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.mega-cat-link:hover .mega-cat-arrow{opacity:1;transform:translateX(0);}
+.mega-cat-arrow{opacity:0;transform:translateX(-4px);transition:.15s;margin-left:auto;color:var(--night-forest);}
+.mega-view-all{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:12px;font-weight:700;color:var(--night-forest);text-decoration:none;border-bottom:1.5px solid var(--night-forest);padding-bottom:2px;}
+
+/* right: featured banner */
+.mega-feature{background:var(--green-attr-bg);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:220px;position:relative;overflow:hidden;}
+.mega-feature-kicker{font-size:9px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--night-forest);margin-bottom:8px;}
+.mega-feature-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--black);line-height:1.2;margin-bottom:12px;}
+.mega-feature-badge{display:inline-block;background:var(--promo);color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:var(--r-pill);margin-bottom:16px;}
+.mega-feature-btn{display:inline-flex;align-items:center;gap:6px;background:var(--night-forest);color:#fff;font-size:12px;font-weight:700;padding:9px 18px;border-radius:var(--r-pill);width:fit-content;text-decoration:none;}
+.mega-feature-img{position:absolute;right:-10px;bottom:-10px;width:130px;height:130px;object-fit:cover;border-radius:var(--r-lg);opacity:.85;}
+
+/* ══════════════════════════════════
+   VARIANT B — COMPACT FLYOUT
+   Simple vertical list, category hover shows sub-panel
+   ══════════════════════════════════ */
+
+.flyout{position:absolute;top:100%;left:0;width:240px;background:var(--white);border:1px solid var(--border);border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:0 16px 40px rgba(0,0,0,.1);opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .18s, transform .18s, visibility .18s;z-index:200;overflow:hidden;}
+.nav-item:hover .flyout,.nav-item.open .flyout{opacity:1;visibility:visible;transform:translateY(0);}
+.flyout-inner{display:flex;}
+.flyout-list{width:240px;padding:8px 0;flex-shrink:0;}
+.flyout-item{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;font-size:13px;font-weight:500;color:var(--text);transition:background .12s;position:relative;}
+.flyout-item:hover{background:var(--bg);color:var(--black);}
+.flyout-item.active{background:var(--bg);color:var(--night-forest);font-weight:700;}
+.flyout-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.flyout-chevron{margin-left:auto;color:var(--muted);}
+.flyout-item:hover .flyout-chevron,.flyout-item.active .flyout-chevron{color:var(--night-forest);}
+.flyout-divider{height:1px;background:var(--border);margin:4px 0;}
+.flyout-sub{width:220px;background:var(--bg);border-left:1px solid var(--border);padding:12px 0;display:none;}
+.flyout-sub.visible{display:block;}
+.flyout-sub-title{font-size:9px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:0 16px 8px;}
+.flyout-sub-link{display:block;padding:8px 16px;font-size:12px;color:var(--text);text-decoration:none;transition:color .12s;}
+.flyout-sub-link:hover{color:var(--night-forest);font-weight:600;}
+.flyout-footer{padding:10px 16px;border-top:1px solid var(--border);background:var(--white);}
+.flyout-footer a{font-size:12px;font-weight:700;color:var(--night-forest);text-decoration:none;display:flex;align-items:center;gap:5px;}
+
+/* ══════════════════════════════════
+   SPACER / PAGE
+   ══════════════════════════════════ */
+.page-content{padding:80px 40px;max-width:1200px;margin:0 auto;}
+.note-box{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:20px;}
+.note-box h3{font-size:14px;font-weight:800;margin-bottom:6px;color:var(--night-forest);}
+.note-box p{font-size:13px;color:var(--text);line-height:1.6;}
+.note-box ul{margin:10px 0 0 16px;font-size:13px;color:var(--text);line-height:2;}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><defs>
+<symbol id="ni-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="ni-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="ni-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.75"/><path d="M15.75 15.75 21 21"/></symbol>
+<symbol id="ni-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+<symbol id="ni-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 3h1.5l2.45 9.8a1 1 0 0 0 .97.7h9.16a1 1 0 0 0 .96-.72l1.96-6.78H5.25"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="18" cy="19.5" r="1.5"/></symbol>
+<symbol id="ni-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</defs></svg>
+
+<!-- ══════════════════════════════════
+     VARIANT A — MEGA MENU
+     ══════════════════════════════════ -->
+<div class="variant-label">Seçenek A — Mega Menü</div>
+<div class="variant-sub">Kategoriye Göre üzerine gelin</div>
+
+<nav class="nav">
+  <div class="nav-logo"><img src="../Assets/logo-green.svg" alt="Nebyan Doğal"></div>
+  <div class="nav-items">
+
+    <!-- DROPDOWN TRIGGER -->
+    <div class="nav-item" id="megaTrigger">
+      <span class="nav-link open">
+        Kategoriye Göre
+        <span class="nb-icon nb-icon-14 chevron"><svg><use href="#ni-chevron-down"/></svg></span>
+      </span>
+
+      <!-- MEGA MENU PANEL -->
+      <div class="mega" style="opacity:1;visibility:visible;transform:translateY(0);left:-40px;">
+        <div class="mega-inner">
+
+          <!-- LEFT: 3-column category groups -->
+          <div class="mega-cats">
+            <div class="mega-group">
+              <div class="mega-group-title">Et & Kasap</div>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--meat)"></span>
+                Dana Eti
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--meat)"></span>
+                Kuzu Eti
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--poultry)"></span>
+                Kümes Hayvanları
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--deli)"></span>
+                Şarküteri & Deli
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-view-all" href="#">
+                Tüm Et Ürünleri
+                <span class="nb-icon nb-icon-14"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+            </div>
+
+            <div class="mega-group">
+              <div class="mega-group-title">Taze & Doğal</div>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--fresh)"></span>
+                Taze Ürünler
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--dairy)"></span>
+                Süt Ürünleri
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--minty)"></span>
+                Organik
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--seafood)"></span>
+                Deniz Ürünleri
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-view-all" href="#">
+                Tüm Taze Ürünler
+                <span class="nb-icon nb-icon-14"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+            </div>
+
+            <div class="mega-group">
+              <div class="mega-group-title">Nebyan Kiler</div>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--dried)"></span>
+                Kuru Gıdalar
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--soil)"></span>
+                Baharatlar
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--promo)"></span>
+                Kampanya & Fırsat
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-cat-link" href="#">
+                <span class="mega-cat-dot" style="background:var(--night-forest)"></span>
+                Kurban Paketleri
+                <span class="nb-icon nb-icon-14 mega-cat-arrow"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+              <a class="mega-view-all" href="#">
+                Tüm Kategoriler
+                <span class="nb-icon nb-icon-14"><svg><use href="#ni-arrow-right"/></svg></span>
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT: Featured -->
+          <div class="mega-feature">
+            <div>
+              <div class="mega-feature-kicker">Haftanın Fırsatı</div>
+              <div class="mega-feature-title">Taze Dana<br>Ürünleri</div>
+              <div class="mega-feature-badge">%30 İndirim</div>
+            </div>
+            <a class="mega-feature-btn" href="#">
+              Hemen İncele
+              <span class="nb-icon nb-icon-14 nb-icon-white"><svg><use href="#ni-arrow-right"/></svg></span>
+            </a>
+            <img class="mega-feature-img" src="../Assets/Nebyan Külbastı Ahşap 2.jpg" alt="">
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /nav-item -->
+
+    <a class="nav-link" href="#">Taze Et Ürünleri</a>
+    <a class="nav-link" href="#">Süt Ürünleri</a>
+    <a class="nav-link" href="#">Nebyan Kiler</a>
+    <a class="nav-link" style="color:var(--promo);font-weight:700;" href="#">İndirimler</a>
+  </div>
+  <div class="nav-right">
+    <div class="search-pill">
+      <span class="nb-icon nb-icon-16 nb-icon-muted"><svg><use href="#ni-search"/></svg></span>
+      Ne arıyorsunuz?
+    </div>
+    <button class="nav-btn"><span class="nb-icon nb-icon-20"><svg><use href="#ni-user"/></svg></span></button>
+    <div class="cart-wrap">
+      <button class="nav-btn"><span class="nb-icon nb-icon-20"><svg><use href="#ni-cart"/></svg></span></button>
+      <div class="cart-badge">3</div>
+    </div>
+  </div>
+</nav>
+
+<!-- Spacer to show mega menu fully -->
+<div style="height:380px;background:var(--bg);border-bottom:1px solid var(--border);"></div>
+
+
+<!-- ══════════════════════════════════
+     VARIANT B — COMPACT FLYOUT
+     ══════════════════════════════════ -->
+<div class="variant-label" style="margin-top:0;">Seçenek B — Kompakt Flyout</div>
+<div class="variant-sub">Kategoriye Göre üzerine gelin → Alt kategori hover</div>
+
+<nav class="nav">
+  <div class="nav-logo"><img src="../Assets/logo-green.svg" alt="Nebyan Doğal"></div>
+  <div class="nav-items">
+
+    <div class="nav-item" id="flyoutTrigger">
+      <span class="nav-link open">
+        Kategoriye Göre
+        <span class="nb-icon nb-icon-14 chevron"><svg><use href="#ni-chevron-down"/></svg></span>
+      </span>
+
+      <div class="flyout" style="opacity:1;visibility:visible;transform:translateY(0);">
+        <div class="flyout-inner">
+          <div class="flyout-list">
+            <div class="flyout-item active" onmouseenter="showSub('dana')">
+              <span class="flyout-dot" style="background:var(--meat)"></span>
+              Dana Eti
+              <span class="nb-icon nb-icon-12 flyout-chevron"><svg><use href="#ni-chevron-right"/></svg></span>
+            </div>
+            <div class="flyout-item" onmouseenter="showSub('kuzu')">
+              <span class="flyout-dot" style="background:var(--meat)"></span>
+              Kuzu Eti
+              <span class="nb-icon nb-icon-12 flyout-chevron"><svg><use href="#ni-chevron-right"/></svg></span>
+            </div>
+            <div class="flyout-item" onmouseenter="showSub('kumes')">
+              <span class="flyout-dot" style="background:var(--poultry)"></span>
+              Kümes Hayvanları
+              <span class="nb-icon nb-icon-12 flyout-chevron"><svg><use href="#ni-chevron-right"/></svg></span>
+            </div>
+            <div class="flyout-divider"></div>
+            <div class="flyout-item" onmouseenter="showSub('taze')">
+              <span class="flyout-dot" style="background:var(--fresh)"></span>
+              Taze Ürünler
+              <span class="nb-icon nb-icon-12 flyout-chevron"><svg><use href="#ni-chevron-right"/></svg></span>
+            </div>
+            <div class="flyout-item" onmouseenter="showSub('sut')">
+              <span class="flyout-dot" style="background:var(--dairy)"></span>
+              Süt Ürünleri
+              <span class="nb-icon nb-icon-12 flyout-chevron"><svg><use href="#ni-chevron-right"/></svg></span>
+            </div>
+            <div class="flyout-item" onmouseenter="showSub('kuru')">
+              <span class="flyout-dot" style="background:var(--dried)"></span>
+              Kuru Gıdalar
+              <span class="nb-icon nb-icon-12 flyout-chevron"><svg><use href="#ni-chevron-right"/></svg></span>
+            </div>
+            <div class="flyout-item" onmouseenter="showSub('deniz')">
+              <span class="flyout-dot" style="background:var(--seafood)"></span>
+              Deniz Ürünleri
+              <span class="nb-icon nb-icon-12 flyout-chevron"><svg><use href="#ni-chevron-right"/></svg></span>
+            </div>
+            <div class="flyout-divider"></div>
+            <div class="flyout-item" onmouseenter="showSub('kampanya')" style="color:var(--promo);font-weight:700;">
+              <span class="flyout-dot" style="background:var(--promo)"></span>
+              Kampanya & Fırsat
+              <span class="nb-icon nb-icon-12 flyout-chevron"><svg><use href="#ni-chevron-right"/></svg></span>
+            </div>
+            <div class="flyout-footer">
+              <a href="#">Tüm Kategoriler <span class="nb-icon nb-icon-12"><svg><use href="#ni-arrow-right"/></svg></span></a>
+            </div>
+          </div>
+
+          <!-- Sub panel -->
+          <div class="flyout-sub visible" id="sub-dana">
+            <div class="flyout-sub-title">Dana Eti</div>
+            <a class="flyout-sub-link" href="#">Dana Kıyma</a>
+            <a class="flyout-sub-link" href="#">Dana Antrikot</a>
+            <a class="flyout-sub-link" href="#">Dana Bonfile</a>
+            <a class="flyout-sub-link" href="#">Dana Külbastı</a>
+            <a class="flyout-sub-link" href="#">Dana Kavurma</a>
+            <a class="flyout-sub-link" href="#">İlikli Kemik</a>
+          </div>
+          <div class="flyout-sub" id="sub-kuzu">
+            <div class="flyout-sub-title">Kuzu Eti</div>
+            <a class="flyout-sub-link" href="#">Kuzu Kıyma</a>
+            <a class="flyout-sub-link" href="#">Kuzu Pirzola</a>
+            <a class="flyout-sub-link" href="#">Kuzu Kol</a>
+            <a class="flyout-sub-link" href="#">Kuzu Gerdan</a>
+          </div>
+          <div class="flyout-sub" id="sub-kumes">
+            <div class="flyout-sub-title">Kümes Hayvanları</div>
+            <a class="flyout-sub-link" href="#">Bütün Tavuk</a>
+            <a class="flyout-sub-link" href="#">Tavuk Göğsü</a>
+            <a class="flyout-sub-link" href="#">Tavuk But</a>
+            <a class="flyout-sub-link" href="#">Hindi</a>
+          </div>
+          <div class="flyout-sub" id="sub-taze">
+            <div class="flyout-sub-title">Taze Ürünler</div>
+            <a class="flyout-sub-link" href="#">Sebzeler</a>
+            <a class="flyout-sub-link" href="#">Meyveler</a>
+            <a class="flyout-sub-link" href="#">Salata</a>
+          </div>
+          <div class="flyout-sub" id="sub-sut">
+            <div class="flyout-sub-title">Süt Ürünleri</div>
+            <a class="flyout-sub-link" href="#">Peynir</a>
+            <a class="flyout-sub-link" href="#">Süt</a>
+            <a class="flyout-sub-link" href="#">Yoğurt</a>
+            <a class="flyout-sub-link" href="#">Tereyağı</a>
+          </div>
+          <div class="flyout-sub" id="sub-kuru">
+            <div class="flyout-sub-title">Kuru Gıdalar</div>
+            <a class="flyout-sub-link" href="#">Kurubaklagil</a>
+            <a class="flyout-sub-link" href="#">Baharatlar</a>
+            <a class="flyout-sub-link" href="#">Tahıllar</a>
+          </div>
+          <div class="flyout-sub" id="sub-deniz">
+            <div class="flyout-sub-title">Deniz Ürünleri</div>
+            <a class="flyout-sub-link" href="#">Balık</a>
+            <a class="flyout-sub-link" href="#">Karides</a>
+            <a class="flyout-sub-link" href="#">Midye</a>
+          </div>
+          <div class="flyout-sub" id="sub-kampanya">
+            <div class="flyout-sub-title">Kampanya & Fırsat</div>
+            <a class="flyout-sub-link" href="#">Bu Haftanın Fırsatları</a>
+            <a class="flyout-sub-link" href="#">Sepet Kampanyaları</a>
+            <a class="flyout-sub-link" href="#">Kurban Paketleri</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a class="nav-link" href="#">Taze Et Ürünleri</a>
+    <a class="nav-link" href="#">Süt Ürünleri</a>
+    <a class="nav-link" href="#">Nebyan Kiler</a>
+    <a class="nav-link" style="color:var(--promo);font-weight:700;" href="#">İndirimler</a>
+  </div>
+  <div class="nav-right">
+    <div class="search-pill">
+      <span class="nb-icon nb-icon-16 nb-icon-muted"><svg><use href="#ni-search"/></svg></span>
+      Ne arıyorsunuz?
+    </div>
+    <button class="nav-btn"><span class="nb-icon nb-icon-20"><svg><use href="#ni-user"/></svg></span></button>
+    <div class="cart-wrap">
+      <button class="nav-btn"><span class="nb-icon nb-icon-20"><svg><use href="#ni-cart"/></svg></span></button>
+      <div class="cart-badge">3</div>
+    </div>
+  </div>
+</nav>
+
+<div style="height:340px;background:var(--bg);"></div>
+
+<!-- ── NOTES ── -->
+<div class="page-content">
+  <div style="margin-bottom:24px;">
+    <div style="font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Tasarım Notu</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--night-forest);">Hangi yaklaşım Nebyan'a daha uygun?</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="note-box">
+      <h3>Seçenek A — Mega Menü ✦ Önerilen</h3>
+      <p>Ürün çeşitliliği yüksek olan markalar için idealdir. Kategoriler görsel olarak ayrışır, kampanya alanı sayesinde pazarlama fırsatı yaratır.</p>
+      <ul>
+        <li>Geniş kategori yapısı için uygun</li>
+        <li>Kampanya/öne çıkan ürün alanı</li>
+        <li>Renk dotları ile marka kimliği güçlenir</li>
+        <li>Hover animasyonla premium his</li>
+      </ul>
+    </div>
+    <div class="note-box">
+      <h3>Seçenek B — Kompakt Flyout</h3>
+      <p>Daha az yer kaplar, alt kategoriler hover ile açılır. Daha sade bir deneyim sunar, mobil adaptasyonu kolaydır.</p>
+      <ul>
+        <li>Az kategori varsa daha temiz görünür</li>
+        <li>Alt kategori drill-down destekler</li>
+        <li>Daha az dikkat dağıtıcı</li>
+        <li>Mobil menüye dönüştürülmesi kolay</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+function showSub(id) {
+  document.querySelectorAll('.flyout-sub').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.flyout-item').forEach(i => i.classList.remove('active'));
+  const sub = document.getElementById('sub-' + id);
+  if(sub) sub.classList.add('visible');
+  event.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>
